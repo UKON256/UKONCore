@@ -1,0 +1,26 @@
+modLoader="javafml" #mandatory
+loaderVersion="[41,)"
+license="All rights reserved"
+
+[[mods]]
+modId="meter"
+version="${file.jarVersion}"
+displayName="Sun meter"
+logoFile="logo.png"
+#credits=""
+authors="ukon"
+description=''' '''
+
+[[dependencies.meter]]
+    modId="forge"
+    mandatory=true
+    versionRange="[41,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.meter]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19,1.20)"
+    ordering="NONE"
+    side="BOTH"
