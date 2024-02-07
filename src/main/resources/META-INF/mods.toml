@@ -3,22 +3,22 @@ loaderVersion="[41,)"
 license="All rights reserved"
 
 [[mods]]
-modId="meter"
+modId="ukon_core"
 version="${file.jarVersion}"
-displayName="Sun meter"
+displayName="UKON's core"
 logoFile="logo.png"
 #credits=""
 authors="ukon"
 description=''' '''
 
-[[dependencies.meter]]
+[[dependencies.ukon_core]]
     modId="forge"
     mandatory=true
     versionRange="[41,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.meter]]
+[[dependencies.ukon_core]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.19,1.20)"
