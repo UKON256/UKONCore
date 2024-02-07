@@ -1,6 +1,8 @@
 package jp.ukon.ukon_core;
 
 import jp.ukon.ukon_core.foundations.ModBase;
+import jp.ukon.ukon_core.foundations.networking.PacketHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +23,8 @@ public class UKONCore extends ModBase {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         ModBase.register(this);
+
+        PacketHelper.register();
     }
 
     public String getModID() {
@@ -31,5 +35,9 @@ public class UKONCore extends ModBase {
     }
     public String getModVersion() {
         return VERSION;
+    }
+
+    public static ResourceLocation asResource(String path) {
+        return new ResourceLocation(ID, path);
     }
 }
