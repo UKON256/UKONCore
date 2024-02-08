@@ -176,16 +176,6 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
-        publications {
-            gpr(MavenPublication) {
-                artifactId = 'ukon_core'
-                from(components.java)
-            }
-        }
-
-        if (project.hasProperty('mavendir')) {
-            maven { url mavendir }
-        }
     }
 }
 
