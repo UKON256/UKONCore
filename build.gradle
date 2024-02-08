@@ -189,13 +189,6 @@ publishing {
     }
 }
 
-sonarqube {
-    properties {
-        property "sonar.projectName", "ukon_core"
-        property "sonar.projectKey", "ukon_core:UKONCore"
-    }
-}
-
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
