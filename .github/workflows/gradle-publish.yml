@@ -16,18 +16,14 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a
+
     - name: Build with Gradle
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: ./gradlew build
+      run: ./gradlew build
 
     - name: Publish to GitHub Packages
       run: ./gradlew build publish
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        package-name: 'ukon_core.ukon_core'
-        min-versions-to-keep: 50
