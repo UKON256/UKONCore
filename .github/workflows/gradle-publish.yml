@@ -21,12 +21,15 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
-          - name: Setup Gradle
-            uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a
+
+      - name: Build with Gradle
+        run: ./gradlew build
 
       - name: Publish package
         with:
-          run: ./gradlew build publish
+          run: ./gradlew publish
           env:
             USERNAME: ${{ github.actor }}
             TOKEN: ${{ secrets.GITHUB_TOKEN }}
