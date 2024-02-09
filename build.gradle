@@ -23,9 +23,9 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 jarJar.enable()
 
-version = "0.0.1"
-group = "jp.ukon"
-archivesBaseName = "${archives_base_name}-${minecraft_version}"
+version = "${minecraft_version}-0.0.1"
+group = "ukon"
+archivesBaseName = "${archives_base_name}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
