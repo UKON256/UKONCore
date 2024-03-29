@@ -17,12 +17,12 @@ jobs:
       - name: Set artifact name
         id: artifact_names
         run: |
-          ModName = $(awk -F '=' '/mod_name/ { print $2; }' gradle.properties)
-          MCVersion = $(awk -F '=' '/minecraft_version/ { print $2; }' gradle.properties)
-          ModVersion = $(awk -F '=' '/mod_version/ { print $2; }' gradle.properties)
-          BUILDNumber = $(awk -F '=' '/build_number/ { print $2; }' gradle.properties)
+          ModName=$(awk -F '=' '/mod_name/ { print $2; }' gradle.properties)
+          MCVersion=$(awk -F '=' '/minecraft_version/ { print $2; }' gradle.properties)
+          ModVersion=$(awk -F '=' '/mod_version/ { print $2; }' gradle.properties)
+          BUILDNumber=$(awk -F '=' '/build_number/ { print $2; }' gradle.properties)
 
-          echo "forge = ${ModName}-${MCVersion}-${ModVersion}-{build_number}-FORGE.jar" >> "$GITHUB_OUTPUT"
+          echo "forge=${ModName}-${MCVersion}-${ModVersion}-{build_number}-FORGE.jar" >> "$GITHUB_OUTPUT"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
