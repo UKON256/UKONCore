@@ -1,0 +1,13 @@
+#name: Auto labeling to issues
+#
+#on:
+#  issues:
+#    types:
+#      - opened
+#      - reopened
+#
+#jobs:
+#  label_issue:
+#    runs-on: ubuntu-latest
+#
+#    steps:

@@ -25,7 +25,7 @@ jarJar.enable()
 
 version = "${minecraft_version}-0.0.1"
 group = "ukon"
-archivesBaseName = "${archives_base_name}"
+archivesBaseName = "${mod_name}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -36,7 +36,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            arg "-mixin.config=${archives_base_name}.mixins.json"
+            arg "-mixin.config=${mod_name}.mixins.json"
             property 'forge.logging.console.level', 'info'
             mods {
                 ukon_core {
@@ -47,7 +47,7 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            arg "-mixin.config=${archives_base_name}.mixins.json"
+            arg "-mixin.config=${mod_name}.mixins.json"
             property 'forge.logging.console.level', 'info'
             mods {
                 ukon_core {
@@ -58,10 +58,10 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-            arg "-mixin.config=${archives_base_name}.mixins.json"
+            arg "-mixin.config=${mod_name}.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', "${archives_base_name}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', "${mod_name}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 ukon_core {
@@ -72,7 +72,7 @@ minecraft {
 
         gameTestServer {
             workingDirectory project.file('run')
-            arg "-mixin.config=${archives_base_name}.mixins.json"
+            arg "-mixin.config=${mod_name}.mixins.json"
             property 'forge.logging.console.level', 'info'
             mods {
                 ukon_core {
@@ -87,7 +87,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
-    add sourceSets.main, "${archives_base_name}.refmap.json"
+    add sourceSets.main, "${mod_name}.refmap.json"
 }
 
 repositories {
@@ -146,14 +146,14 @@ afterEvaluate {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "${archives_base_name}",
+                "Specification-Title"     : "${mod_name}",
                 "Specification-Vendor"    : "ukon",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.jar.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "ukon",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'MixinConfigs': "${archives_base_name}.mixins.json"
+                'MixinConfigs': "${mod_name}.mixins.json"
         ])
     }
 }

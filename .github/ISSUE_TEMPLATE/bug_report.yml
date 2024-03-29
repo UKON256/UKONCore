@@ -1,0 +1,32 @@
+name: バグ報告
+description: Modのバグを報告。一つのIssueにつき一つでお願いします
+body:
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft Version
+    validations:
+      required: true
+
+  - type: input
+    id: mod-version
+    attributes:
+      label: Mod Version
+    validations:
+      required: true
+
+  - type: input
+    id: log-file
+    label: "ログファイル"
+    description: "よくわからない方は[こちら]()をご覧になってください"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: "再現手順"
+
+  - type: textarea
+    attributes:
+      label: "その他の情報"
+

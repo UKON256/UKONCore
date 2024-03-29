@@ -1,0 +1,16 @@
+name: 改善案の提案
+description: 一つのIssueにつき一つでお願いします
+body:
+  - type: textarea
+    id: before
+    attributes:
+      label: 改善前の内容
+    validations:
+      required: true
+
+  - type: textarea
+    id: after
+    attributes:
+      label: 改善後の内容
+    validations:
+      required: true
