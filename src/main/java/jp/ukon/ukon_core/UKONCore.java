@@ -24,6 +24,7 @@ public class UKONCore extends ModBase {
         MinecraftForge.EVENT_BUS.register(this);
         ModBase.register(this);
 
+        AllItems.register(bus);
         PacketHelper.register();
     }
 
