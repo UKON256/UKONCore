@@ -9,15 +9,15 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+      - uses: actions/checkout@v1
+        - name: Set up JDK 17
+          uses: actions/setup-java@v2
+          with:
+            java-version: 17
+            distribution: zulu
+            cache: gradle
 
-      - name: Publish package
-        run: ./gradlew publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+      - name: Publish to Github Packages
+          env:
+            GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+          run: ./gradlew build publish
