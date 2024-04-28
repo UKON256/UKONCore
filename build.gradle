@@ -156,12 +156,8 @@ jar {
 publishing {
     publications {
         gpr(MavenPublication) {
-            groupId project.group
             artifactId = archivesBaseName
-            version project.version
-            artifact jar
-            //artifact sourcesJar
-            //artifact apiJar
+            from(components.java)
         }
     }
     repositories {
