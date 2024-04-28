@@ -2,7 +2,6 @@ buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
-        jcenter()
         maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
         maven { url = 'https://maven.parchmentmc.org' }
     }
@@ -21,7 +20,6 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
-jarJar.enable()
 
 version = "${minecraft_version}-0.0.1"
 group = "ukon"
@@ -119,7 +117,6 @@ repositories {
         }
     }
 
-    mavenLocal()
     flatDir {
         dirs 'libs'
     }
@@ -140,11 +137,6 @@ dependencies {
     }
 }
 
-afterEvaluate {
-    tasks.configureReobfTaskForReobfJar.mustRunAfter(tasks.compileJava)
-    tasks.configureReobfTaskForReobfJarJar.mustRunAfter(tasks.compileJava)
-}
-
 jar {
     manifest {
         attributes([
@@ -158,30 +150,28 @@ jar {
                 'MixinConfigs': "${mod_name}.mixins.json"
         ])
     }
+    finalizedBy "reobfJar"
 }
-
-jar.finalizedBy('reobfJar')
-tasks.jarJar.finalizedBy('reobfJarJar')
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        gpr(MavenPublication) {
             groupId project.group
             artifactId = archivesBaseName
             version project.version
             artifact jar
             //artifact sourcesJar
             //artifact apiJar
-            pom.withXml {
-                def node = asNode()
-                if (node.depencies.size() > 0)
-                    node.remove(node.depencies)
-            }
         }
     }
     repositories {
         maven {
-            url "file://" + System.getenv("local_maven")
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/UKON256/UKONCore")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }

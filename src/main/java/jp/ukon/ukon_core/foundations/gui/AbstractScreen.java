@@ -14,6 +14,9 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractScreen extends Screen {
+    protected AbstractScreen() {
+        super(Component.empty());
+    }
     protected AbstractScreen(Component title) {
         super(title);
     }
