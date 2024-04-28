@@ -164,10 +164,10 @@ publishing {
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/ukon256/UKONCore")
-            credentials {
+            /*credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_PUBLISH_TOKEN")
-            }
+            }*/
         }
     }
 }
