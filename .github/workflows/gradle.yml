@@ -1,0 +1,20 @@
+name: Publish package
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: zulu
+          cache: gradle
+
+      - name: Publish to Github Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+        run: ./gradlew build publish
