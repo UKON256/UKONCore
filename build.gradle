@@ -17,11 +17,11 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = "${minecraft_version}-0.0.1"
+version = "${minecraft_version}-${mod_version}"
 group = "ukon"
 archivesBaseName = "${mod_name}"
 
@@ -165,8 +165,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/UKON256/UKONCore")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                //username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_PUBLISH_TOKEN")
             }
         }
     }
