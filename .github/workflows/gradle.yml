@@ -14,6 +14,13 @@ jobs:
           distribution: zulu
           cache: gradle
 
+      - name: Build with Gradle
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: ./gradlew build
+
       - name: Publish to Github Packages
         env:
           GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
