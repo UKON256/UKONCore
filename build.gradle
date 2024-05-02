@@ -95,13 +95,17 @@ repositories {
         name "Vanilla"
         url "https://libraries.minecraft.net/"
     }
-    /*maven { //JEI
+    maven { //JEI
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
-    }*/
-    /*maven { //Curios
+    }
+    maven { //Curios
         url = "https://maven.theillusivec4.top/"
-    }*/
+    }
+    maven { //Flywheel
+        name "tterrag maven"
+        url "https://maven.tterrag.com/"
+    }
 
     maven {
         url = 'https://www.cursemaven.com'
@@ -125,12 +129,14 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    // compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    // runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
-    // compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
-    // runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}")
+
+    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
 
     if (!Boolean.getBoolean('idea.sync.active')) {
         annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
@@ -165,8 +171,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/ukon256/UKONCore")
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+                username = project.findProperty("gpr.user")
+                password = project.findProperty("gpr.key")
             }
         }
     }
