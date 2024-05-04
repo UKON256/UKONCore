@@ -2,7 +2,7 @@ package jp.ukon.ukon_core.foundations.guide;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import jp.ukon.ukon_core.Core_AllItems;
+import jp.ukon.ukon_core.AllUCItems;
 import jp.ukon.ukon_core.foundations.item.IHasGuideItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -69,7 +69,7 @@ public class InventoryToGuide {
         // アイコン
         ms.pushPose();
         ms.translate(0, 0, 300);
-        mc.getItemRenderer().renderAndDecorateItem(new ItemStack(Core_AllItems.Guide.get()), x, y, 400);
+        mc.getItemRenderer().renderAndDecorateItem(new ItemStack(AllUCItems.Guide.get()), x, y, 400);
         ms.popPose();
 
         // ?マーク

@@ -1,27 +1,27 @@
-name: Publish package
+#name: Publish package
 
-on: push
+#on: push
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: 17
-          distribution: zulu
-          cache: gradle
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: 17
+#          distribution: zulu
+#          cache: gradle
 
-      - name: Build with Gradle
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: ./gradlew build
+#      - name: Build with Gradle
+#        uses: nick-invision/retry@v2
+#        with:
+#          timeout_minutes: 10
+#          max_attempts: 3
+#          command: ./gradlew build
 
-      - name: Publish to Github Packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-        run: ./gradlew build publish
+#      - name: Publish to Github Packages
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+#        run: ./gradlew build publish

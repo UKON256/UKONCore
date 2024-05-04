@@ -11,7 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class UKONCore {
     public static final String ID = "ukon_core";
     public static final String NAME = "UKON's core";
-    public static final String VERSION = "0.1.1";
+    public static final String VERSION = "0.1.2";
 
     public UKONCore() { load(); }
 
@@ -20,7 +20,7 @@ public class UKONCore {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
 
-        Core_AllItems.register(bus);
+        AllUCItems.register(bus);
         PacketHelper.register();
     }
 
