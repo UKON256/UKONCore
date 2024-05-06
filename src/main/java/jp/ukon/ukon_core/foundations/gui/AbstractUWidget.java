@@ -13,7 +13,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractUWidget extends AbstractWidget implements IGuiTickEventListener {
-    protected List<Component> toolTip = new LinkedList<>();
+    protected List<Component> tooltip = new LinkedList<>();
     public int lockedTooltipX, lockedTooltipY = -1;
 
     public AbstractUWidget(int x, int y, int width, int height) {
@@ -23,8 +23,12 @@ public abstract class AbstractUWidget extends AbstractWidget implements IGuiTick
         super(x, y, width, height, message);
     }
 
-    public List<Component> getToolTip() {
-        return toolTip;
+    public List<Component> getTooltip() {
+        return tooltip;
+    }
+    public void setTooltip(Component text) {
+        tooltip.clear();
+        tooltip.add(text);
     }
 
     @Override

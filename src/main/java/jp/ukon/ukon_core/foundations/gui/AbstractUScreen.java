@@ -61,7 +61,7 @@ public abstract class AbstractUScreen extends Screen {
             if (!(widget instanceof AbstractUWidget uWidget && uWidget.isHoveredOrFocused() && uWidget.visible))
                 continue;
 
-            List<Component> tooltip = uWidget.getToolTip();
+            List<Component> tooltip = uWidget.getTooltip();
             if (tooltip.isEmpty())
                 continue;
 

@@ -80,7 +80,7 @@ public abstract class AbstractUContainerScreen<T extends AbstractContainerMenu> 
             if (!(widget instanceof AbstractUWidget uWidget && uWidget.isHoveredOrFocused()))
                 continue;
 
-            List<Component> tooltip = uWidget.getToolTip();
+            List<Component> tooltip = uWidget.getTooltip();
             if (tooltip.isEmpty())
                 continue;
 

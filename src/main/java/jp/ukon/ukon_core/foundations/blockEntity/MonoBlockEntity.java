@@ -19,7 +19,4 @@ public class MonoBlockEntity extends CachedAABBBlockEntity {
             wasInitialized = true;
         }
     }
-
-    public void onDestroy() {
-    }
 }

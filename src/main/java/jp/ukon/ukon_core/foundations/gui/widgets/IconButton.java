@@ -32,11 +32,6 @@ public class IconButton extends AbstractUWidget {
         blit(stack, x, y, texture.startX, texture.startY, texture.width, texture.height);
     }
 
-    public void setTooltip(Component text) {
-        toolTip.clear();
-        toolTip.add(text);
-    }
-
     public void setIcon(IScreenElement icon) {
         this.icon = icon;
     }
