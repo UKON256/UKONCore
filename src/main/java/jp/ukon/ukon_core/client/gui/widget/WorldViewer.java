@@ -28,11 +28,9 @@ public class WorldViewer extends AbstractUWidget {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         super.render(graphics, mouseX, mouseY, partialTicks);
 
-        //OverlayWorldRenderer.submitRenderingTask(infoSupplier.get(), frameBuffer);
+        OverlayWorldRenderer.submitRenderingTask(infoSupplier.get(), frameBuffer);
 
         Minecraft mc = Minecraft.getInstance();
-        int viewerWidth = mc.getWindow().getGuiScaledWidth();
-        int viewerHeight = mc.getWindow().getGuiScaledHeight();
-        RenderHelper.drawFrameBuffer(frameBuffer, true, false, viewerWidth * 0.2f, viewerWidth * 0.8f, viewerHeight * 0.2f, viewerHeight * 0.8f);
+        RenderHelper.drawFrameBuffer(frameBuffer, this.getX(), this.getX() + this.width, this.getY(), this.getY() + this.height);
     }
 }
