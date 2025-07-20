@@ -1,0 +1,5 @@
+{
+  "ukon_core.gui.config.client": "クライアントの設定",
+  "ukon_core.gui.config.server": "サーバーの設定",
+  "ukon_core.gui.config.world": "ワールドの設定"
+}
