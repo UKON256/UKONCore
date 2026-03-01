@@ -7,13 +7,13 @@ import org.apache.commons.lang3.Validate;
 import org.joml.Matrix4f;
 
 public class WorldViewRenderInfo {
-    protected ClientLevel renderingLevel;
-    protected Vec3 cameraPosition;
-    protected Matrix4f cameraTransformation;
-    protected int renderDistance;
-    protected boolean doRenderSky;
-    protected boolean doRenderFog;
-    protected boolean doRenderHand;
+    public ClientLevel renderingLevel;
+    public Vec3 cameraPosition;
+    public Matrix4f cameraTransformation;
+    public int renderDistance;
+    public boolean doRenderSky;
+    public boolean doRenderFog;
+    public boolean doRenderHand;
 
     // Builder用
     private WorldViewRenderInfo(ClientLevel renderingLevel, Vec3 cameraPosition, Matrix4f cameraTransformation, int renderDistance, boolean doRenderSky, boolean doRenderFog, boolean doRenderHand) {

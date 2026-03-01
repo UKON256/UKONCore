@@ -20,19 +20,19 @@ public class RenderHelper {
 
         // 左上
         buffer.vertex(xStart, yStart, 0)
-                .uv(0, 0)
+                .uv(0, 1)
                 .endVertex();
         // 左下
         buffer.vertex(xStart, yEnd, 0)
-                .uv(0, 1)
+                .uv(0, 0)
                 .endVertex();
         // 右下
         buffer.vertex(xEnd, yEnd, 0)
-                .uv(1, 1)
+                .uv(1, 0)
                 .endVertex();
         // 右上
         buffer.vertex(xEnd, yStart, 0)
-                .uv(1, 0)
+                .uv(1, 1)
                 .endVertex();
         tesselator.end();
 

@@ -4,7 +4,6 @@ import jp.ukon.ukon_core.extender.IECamera;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,6 +18,10 @@ public abstract class MixinCamera implements IECamera {
 
     @Shadow
     protected abstract void setRotation(float pYRot, float pXRot);
+
+    @Shadow public abstract boolean isDetached();
+
+    @Shadow private boolean detached;
 
     @Override
     public void resetState(Vec3 pos, ClientLevel level) {

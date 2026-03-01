@@ -35,7 +35,9 @@ public class TestWorldViewerScreen extends AbstractUScreen {
 
     @Override
     protected void init() {
-        addRenderableWidget(viewerWidget = new WorldViewer(0, 0, 100, 100, infoSupplier));
+        int windowWidth = minecraft.getWindow().getGuiScaledWidth();
+        int windowHeight = minecraft.getWindow().getGuiScaledHeight();
+        addRenderableWidget(viewerWidget = new WorldViewer((int) (windowWidth * 0.2f), (int) (windowHeight * 0.2f), (int) (windowWidth * 0.6f), (int) (windowHeight * 0.6f), infoSupplier));
     }
 
     @Override

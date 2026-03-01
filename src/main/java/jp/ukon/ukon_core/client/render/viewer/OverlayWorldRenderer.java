@@ -1,6 +1,7 @@
 package jp.ukon.ukon_core.client.render.viewer;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import jp.ukon.ukon_core.api.event.render.GameRenderEndEvent;
@@ -46,51 +47,68 @@ public class OverlayWorldRenderer {
         Minecraft mc = Minecraft.getInstance();
 
         // 描画先を仮想RenderTargetへ切り替え
+        RenderTarget oldFrameBuffer = mc.getMainRenderTarget();
+        ((IEMinecraftClient) mc).setFrameBuffer(frameBuffer);
         frameBuffer.bindWrite(true);
+
+        if (!info.doRenderSky) {
+            GlStateManager._colorMask(true, true, true, true);
+            frameBuffer.setClearColor(0, 0, 0, 0);
+            frameBuffer.clear(true);
+        }
 
         // レンダリング
         RenderSystem.clear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
+        prepareFrame();
         renderWorld(info);
 
         // 元のターゲットに戻す
+        ((IEMinecraftClient) mc).setFrameBuffer(oldFrameBuffer);
         mc.getMainRenderTarget().bindWrite(true);
+    }
+
+    protected static void prepareFrame() {
+        Minecraft mc = Minecraft.getInstance();
+        mc.getMainRenderTarget().bindWrite(false);
     }
 
     protected static void renderWorld(WorldViewRenderInfo info) {
         // 準備
         Minecraft mc = Minecraft.getInstance();
-        IEGameRenderer extendedGameRenderer = (IEGameRenderer) mc.gameRenderer;
         ResourceKey<Level> dimension = info.renderingLevel.dimension();
         LevelRenderer worldRenderer = ClientWorldLoader.getWorldRenderer(dimension);
 
         ClientLevel oldWorld = mc.level;
         LevelRenderer oldWorldRenderer = mc.levelRenderer;
-        boolean oldDoRenderHand = extendedGameRenderer.getDoRenderHand();
         Camera oldCamera = mc.gameRenderer.getMainCamera();
-
-        // 仮想カメラ作成
-        Camera viewCamera = new Camera();
-        ((IECamera) viewCamera).setCameraPosition(info.cameraPosition);
-        //setRot
-        ((IECamera) viewCamera).setCameraLevel(info.renderingLevel);
+        boolean oldDoRenderHand = ((IEGameRenderer) mc.gameRenderer).getDoRenderHand();
+        boolean oldNoPhysics = mc.player.noPhysics;
 
         // レンダリング本体
+        Camera newCamera = new Camera();
+        ((IECamera) newCamera).setCameraLevel(info.renderingLevel);
+        //((IECamera) newCamera).setCameraPosition(info.cameraPosition);
+        //((IECamera) viewCamera).setCameraRotation(0, 0);
+
         mc.level = info.renderingLevel;
         ((IEMinecraftClient) mc).setWorldRenderer(worldRenderer);
+        ((IEGameRenderer) mc.gameRenderer).setCamera(newCamera);
+        mc.player.noPhysics = true;
         mc.gameRenderer.setRenderHand(info.doRenderHand);
-        extendedGameRenderer.setCamera(viewCamera);
-        ((IEParticleEngine) mc.particleEngine).setWorld(info.renderingLevel);
-        mc.getBlockEntityRenderDispatcher().level = info.renderingLevel;
+        //((IEParticleEngine) mc.particleEngine).setWorld(info.renderingLevel);
+        //mc.getBlockEntityRenderDispatcher().level = info.renderingLevel;
 
         mc.gameRenderer.renderLevel(mc.getPartialTick(), System.nanoTime(), new PoseStack());
+        //mc.getEntityRenderDispatcher().prepare(mc.level, viewCamera, mc.crosshairPickEntity);
 
         // 復元
-        mc.level = oldWorld;
         ((IEMinecraftClient) mc).setWorldRenderer(oldWorldRenderer);
+        ((IEGameRenderer) mc.gameRenderer).setCamera(oldCamera);
+        mc.player.noPhysics = oldNoPhysics;
+        mc.level = oldWorld;
         mc.gameRenderer.setRenderHand(oldDoRenderHand);
-        extendedGameRenderer.setCamera(oldCamera);
-        ((IEParticleEngine) mc.particleEngine).setWorld(oldWorld);
-        mc.getBlockEntityRenderDispatcher().level = info.renderingLevel;
+        //((IEParticleEngine) mc.particleEngine).setWorld(oldWorld);
+        //mc.getBlockEntityRenderDispatcher().level = oldWorld;
     }
 
     @SubscribeEvent
