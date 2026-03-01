@@ -4,15 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "ukon_core.refmap.json",
   "mixins": [
-    "client.MixinMinecraft",
-    "common.MixinBiomeManager"
   ],
   "client": [
-    "client.MixinCamera",
-    "client.MixinGameRenderer",
-    "client.MixinParticleEngine",
-    ,
-    "client.MixinRenderTarget"
   ],
   "injectors": {
     "defaultRequire": 1

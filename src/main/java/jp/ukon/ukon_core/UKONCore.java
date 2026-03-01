@@ -1,6 +1,5 @@
 package jp.ukon.ukon_core;
 
-import jp.ukon.ukon_core.debug.commands.UCCommands;
 import jp.ukon.ukon_core.init.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -32,15 +31,11 @@ public class UKONCore {
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         MinecraftForge.EVENT_BUS.register(UKONCore.class);
 
-        UCConfigs.register(modLoadingContext);
-        UCGuides.register();
-        UCItems.register(modEventBus);
-
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> UKONCoreClient.initClient(modEventBus, forgeEventBus));
     }
 
     @SubscribeEvent
     public static void registerCommands(RegisterCommandsEvent event) {
-        UCCommands.register(event.getDispatcher());
+        //UCCommands.register(event.getDispatcher());
     }
 }
